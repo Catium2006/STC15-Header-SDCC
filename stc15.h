@@ -1,6 +1,20 @@
 #ifndef __STC15_H__
 #define __STC15_H__
 
+#ifdef _WIN32
+
+#define __sfr unsigned char
+#define __sbit unsigned char
+#define __bit unsigned char
+#define __at(x)
+#define __interrupt(x)
+#define __xdata
+#define __pdata
+#define __idata
+#define __code
+
+#endif
+
 /**
  * stc15.h
  * STC15头文件, 但是SDCC语法
