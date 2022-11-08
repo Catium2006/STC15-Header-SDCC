@@ -1,27 +1,49 @@
 #ifndef __STC15_H__
 #define __STC15_H__
 
-#ifdef _WIN32
-
-#define __sfr unsigned char
-#define __sbit unsigned char
-#define __bit unsigned char
-#define __at(x)
-#define __interrupt(x)
-#define __xdata
-#define __pdata
-#define __idata
-#define __code
-
-#endif
-
-
 /**
  * stc15.h
  * STC15头文件, 但是SDCC语法
  * 修改自STC-ISP提供的keil头文件
  * Modified by Catium2006 2022/10/25
  */
+
+
+// 防止编辑器(如VSCode)报错未定义关键字
+#ifndef __SDCC
+
+// SDCC语言扩展 特殊功能寄存器
+#define __sfr unsigned char
+// SDCC语言扩展 特殊功能寄存器(16bit)
+#define __sfr16 unsigned short
+// SDCC语言扩展 特殊功能寄存器(32bit)
+#define __sfr32 unsigned int
+// SDCC语言扩展
+#define __sbit unsigned char
+// SDCC语言扩展
+#define __bit unsigned char
+// SDCC语言扩展
+#define __at(x)
+// SDCC语言扩展 指定中断
+#define __interrupt(x)
+// SDCC语言扩展 指定存储
+#define __data
+// SDCC语言扩展 指定存储
+#define __xdata
+// SDCC语言扩展 指定存储
+#define __pdata
+// SDCC语言扩展 指定存储
+#define __idata
+// SDCC语言扩展 指定存储
+#define __code
+// SDCC语言扩展 裸函数
+#define __naked
+// SDCC语言扩展 内联汇编开始
+#define __asm
+// SDCC语言扩展 内联汇编结束
+#define __endasm
+
+#endif  // #ifdef __SDCC
 
 /////////////////////////////////////////////////
 //注意: STC15W4K32S4系列的芯片,上电后所有与PWM相关的IO口均为
@@ -281,52 +303,52 @@ __sfr __at(0xf7) PWMFDCR;  // xx00,0000 PWM外部异常检测控制寄存器
 
 //如下特殊功能寄存器位于扩展RAM区域
 //访问这些寄存器,需先将P_SW2的BIT7设置为1,才可正常读写
-#define PWMC (*(__xdata unsigned int volatile *)0xfff0)
-#define PWMCH (*(__xdata unsigned char volatile *)0xfff0)
-#define PWMCL (*(__xdata unsigned char volatile *)0xfff1)
-#define PWMCKS (*(__xdata unsigned char volatile *)0xfff2)
-#define PWM2T1 (*(__xdata unsigned int volatile *)0xff00)
-#define PWM2T1H (*(__xdata unsigned char volatile *)0xff00)
-#define PWM2T1L (*(__xdata unsigned char volatile *)0xff01)
-#define PWM2T2 (*(__xdata unsigned int volatile *)0xff02)
-#define PWM2T2H (*(__xdata unsigned char volatile *)0xff02)
-#define PWM2T2L (*(__xdata unsigned char volatile *)0xff03)
-#define PWM2CR (*(__xdata unsigned char volatile *)0xff04)
-#define PWM3T1 (*(__xdata unsigned int volatile *)0xff10)
-#define PWM3T1H (*(__xdata unsigned char volatile *)0xff10)
-#define PWM3T1L (*(__xdata unsigned char volatile *)0xff11)
-#define PWM3T2 (*(__xdata unsigned int volatile *)0xff12)
-#define PWM3T2H (*(__xdata unsigned char volatile *)0xff12)
-#define PWM3T2L (*(__xdata unsigned char volatile *)0xff13)
-#define PWM3CR (*(__xdata unsigned char volatile *)0xff14)
-#define PWM4T1 (*(__xdata unsigned int volatile *)0xff20)
-#define PWM4T1H (*(__xdata unsigned char volatile *)0xff20)
-#define PWM4T1L (*(__xdata unsigned char volatile *)0xff21)
-#define PWM4T2 (*(__xdata unsigned int volatile *)0xff22)
-#define PWM4T2H (*(__xdata unsigned char volatile *)0xff22)
-#define PWM4T2L (*(__xdata unsigned char volatile *)0xff23)
-#define PWM4CR (*(__xdata unsigned char volatile *)0xff24)
-#define PWM5T1 (*(__xdata unsigned int volatile *)0xff30)
-#define PWM5T1H (*(__xdata unsigned char volatile *)0xff30)
-#define PWM5T1L (*(__xdata unsigned char volatile *)0xff31)
-#define PWM5T2 (*(__xdata unsigned int volatile *)0xff32)
-#define PWM5T2H (*(__xdata unsigned char volatile *)0xff32)
-#define PWM5T2L (*(__xdata unsigned char volatile *)0xff33)
-#define PWM5CR (*(__xdata unsigned char volatile *)0xff34)
-#define PWM6T1 (*(__xdata unsigned int volatile *)0xff40)
-#define PWM6T1H (*(__xdata unsigned char volatile *)0xff40)
-#define PWM6T1L (*(__xdata unsigned char volatile *)0xff41)
-#define PWM6T2 (*(__xdata unsigned int volatile *)0xff42)
-#define PWM6T2H (*(__xdata unsigned char volatile *)0xff42)
-#define PWM6T2L (*(__xdata unsigned char volatile *)0xff43)
-#define PWM6CR (*(__xdata unsigned char volatile *)0xff44)
-#define PWM7T1 (*(__xdata unsigned int volatile *)0xff50)
-#define PWM7T1H (*(__xdata unsigned char volatile *)0xff50)
-#define PWM7T1L (*(__xdata unsigned char volatile *)0xff51)
-#define PWM7T2 (*(__xdata unsigned int volatile *)0xff52)
-#define PWM7T2H (*(__xdata unsigned char volatile *)0xff52)
-#define PWM7T2L (*(__xdata unsigned char volatile *)0xff53)
-#define PWM7CR (*(__xdata unsigned char volatile *)0xff54)
+#define PWMC (*(__xdata unsigned int volatile*)0xfff0)
+#define PWMCH (*(__xdata unsigned char volatile*)0xfff0)
+#define PWMCL (*(__xdata unsigned char volatile*)0xfff1)
+#define PWMCKS (*(__xdata unsigned char volatile*)0xfff2)
+#define PWM2T1 (*(__xdata unsigned int volatile*)0xff00)
+#define PWM2T1H (*(__xdata unsigned char volatile*)0xff00)
+#define PWM2T1L (*(__xdata unsigned char volatile*)0xff01)
+#define PWM2T2 (*(__xdata unsigned int volatile*)0xff02)
+#define PWM2T2H (*(__xdata unsigned char volatile*)0xff02)
+#define PWM2T2L (*(__xdata unsigned char volatile*)0xff03)
+#define PWM2CR (*(__xdata unsigned char volatile*)0xff04)
+#define PWM3T1 (*(__xdata unsigned int volatile*)0xff10)
+#define PWM3T1H (*(__xdata unsigned char volatile*)0xff10)
+#define PWM3T1L (*(__xdata unsigned char volatile*)0xff11)
+#define PWM3T2 (*(__xdata unsigned int volatile*)0xff12)
+#define PWM3T2H (*(__xdata unsigned char volatile*)0xff12)
+#define PWM3T2L (*(__xdata unsigned char volatile*)0xff13)
+#define PWM3CR (*(__xdata unsigned char volatile*)0xff14)
+#define PWM4T1 (*(__xdata unsigned int volatile*)0xff20)
+#define PWM4T1H (*(__xdata unsigned char volatile*)0xff20)
+#define PWM4T1L (*(__xdata unsigned char volatile*)0xff21)
+#define PWM4T2 (*(__xdata unsigned int volatile*)0xff22)
+#define PWM4T2H (*(__xdata unsigned char volatile*)0xff22)
+#define PWM4T2L (*(__xdata unsigned char volatile*)0xff23)
+#define PWM4CR (*(__xdata unsigned char volatile*)0xff24)
+#define PWM5T1 (*(__xdata unsigned int volatile*)0xff30)
+#define PWM5T1H (*(__xdata unsigned char volatile*)0xff30)
+#define PWM5T1L (*(__xdata unsigned char volatile*)0xff31)
+#define PWM5T2 (*(__xdata unsigned int volatile*)0xff32)
+#define PWM5T2H (*(__xdata unsigned char volatile*)0xff32)
+#define PWM5T2L (*(__xdata unsigned char volatile*)0xff33)
+#define PWM5CR (*(__xdata unsigned char volatile*)0xff34)
+#define PWM6T1 (*(__xdata unsigned int volatile*)0xff40)
+#define PWM6T1H (*(__xdata unsigned char volatile*)0xff40)
+#define PWM6T1L (*(__xdata unsigned char volatile*)0xff41)
+#define PWM6T2 (*(__xdata unsigned int volatile*)0xff42)
+#define PWM6T2H (*(__xdata unsigned char volatile*)0xff42)
+#define PWM6T2L (*(__xdata unsigned char volatile*)0xff43)
+#define PWM6CR (*(__xdata unsigned char volatile*)0xff44)
+#define PWM7T1 (*(__xdata unsigned int volatile*)0xff50)
+#define PWM7T1H (*(__xdata unsigned char volatile*)0xff50)
+#define PWM7T1L (*(__xdata unsigned char volatile*)0xff51)
+#define PWM7T2 (*(__xdata unsigned int volatile*)0xff52)
+#define PWM7T2H (*(__xdata unsigned char volatile*)0xff52)
+#define PWM7T2L (*(__xdata unsigned char volatile*)0xff53)
+#define PWM7CR (*(__xdata unsigned char volatile*)0xff54)
 
 /////////////////////////////////////////////////
 
