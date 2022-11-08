@@ -5,7 +5,7 @@
  * stc15.h
  * STC15头文件, 但是SDCC语法
  * 修改自STC-ISP提供的keil头文件
- * Modified by Catium2006 2022/10/25
+ * Modified by Catium2006 2022/11/8
  */
 
 
@@ -43,12 +43,19 @@
 // SDCC语言扩展 内联汇编结束
 #define __endasm
 
-#endif  // #ifdef __SDCC
+// 快速内联汇编
+#define asm(str)
+// 快速内联汇编
+#define __asm__(str)
+
+#else
 
 // 快速内联汇编
 #define asm(str) __asm str __endasm
 // 快速内联汇编
 #define __asm__(str) asm(str)
+
+#endif  // #ifdef __SDCC
 
 
 
