@@ -59,8 +59,7 @@
 // 快速内联汇编
 #define asm(str) __asm str __endasm
 
-#endif  // #ifdef __SDCC
-
+#endif  // #ifndef __SDCC
 
 
 /////////////////////////////////////////////////
