@@ -42,6 +42,12 @@
 #define __asm
 // SDCC语言扩展 内联汇编结束
 #define __endasm
+// SDCC语言扩展 指定存储
+#define __far
+// SDCC语言扩展 指定存储
+#define __near
+// SDCC语言扩展 指定函数使用的寄存器组
+#define __using(x)
 
 // 快速内联汇编
 #define asm(str)
@@ -52,8 +58,6 @@
 
 // 快速内联汇编
 #define asm(str) __asm str __endasm
-// 快速内联汇编
-#define __asm__(str) asm(str)
 
 #endif  // #ifdef __SDCC
 
